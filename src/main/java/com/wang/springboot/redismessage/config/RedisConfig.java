@@ -22,7 +22,7 @@ public class RedisConfig {
 
 
     /**
-     * 发布主题
+     * 主题
      *
      * @return
      */
@@ -34,24 +34,24 @@ public class RedisConfig {
 
 
     /**
-     * 发布/订阅容器
+     * 调度中心
      *
      * @param redisConnectionFactory
      * @return
      */
     @Bean
     RedisMessageListenerContainer redisContainer(RedisConnectionFactory redisConnectionFactory, TestListenerService listener) {
-        //负责执行发布/订阅任务线程池
+        //调度中心任务线程池
         ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("redis-container-pool-%d").build();
         ThreadPoolExecutor poolExecutor =
                 new ThreadPoolExecutor(5, 5, 0, TimeUnit.MICROSECONDS, new LinkedBlockingQueue<>(), threadFactory);
-        //发布订阅容器
+        //调度中心
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        //容器依赖连接工厂
+        //调度中心依赖连接工厂
         container.setConnectionFactory(redisConnectionFactory);
-        //添加发布/订阅组合
+        //添加主题/订阅组合
         container.addMessageListener(listener, topic());
-        //指定容器线程池
+        //指定调度中心线程池
         container.setTaskExecutor(poolExecutor);
         return container;
     }

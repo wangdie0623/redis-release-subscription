@@ -21,8 +21,8 @@ public class RedisMessageApplicationTests {
     public void contextLoads() {
         User user = new User();
         user.setName("xx");
-        redisService.releaseMsg("user-channel", user);
-        redisService.releaseMsg("user-channel", user.toString());
+        redisService.releaseMsg("user-channel", user);//在主题中发布新内容
+        redisService.releaseMsg("user-channel", user.toString());//在主题中发布新内容
     }
 
 }

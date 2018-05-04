@@ -10,9 +10,13 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 
+/**
+ * 具体订阅事件
+ */
 @Component
 @Slf4j
 public class TestListenerService implements MessageListener {
+    //订阅处理细节
     @Override
     public void onMessage(Message message, byte[] pattern) {
         User user = deserializeObj(message.getBody(), User.class);

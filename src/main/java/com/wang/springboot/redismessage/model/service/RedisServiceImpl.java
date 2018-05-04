@@ -7,6 +7,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+/**
+ * 订阅者
+ */
 @Service
 @Slf4j
 public class RedisServiceImpl implements IRedisService {
